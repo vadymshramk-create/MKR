@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ліс у Карпатах</title>
     <style>
-      /* ==================== CSS Variables & Root ==================== */
+      /* css */
       :root {
         --color-bg: #f0f7f4;
         --color-fg: #1a4d2e;
@@ -30,7 +30,6 @@
         --transition: all 0.2s ease;
       }
 
-      /* ==================== Reset & Base Styles ==================== */
       * {
         margin: 0;
         padding: 0;
@@ -56,7 +55,6 @@
         min-height: 100vh;
       }
 
-      /* ==================== Typography ==================== */
       h1,
       h2,
       h3,
@@ -82,7 +80,7 @@
         color: var(--color-primary-dark);
       }
 
-      /* ==================== Header ==================== */
+      /* header */
       .header {
         background: linear-gradient(
           135deg,
@@ -134,8 +132,67 @@
         color: var(--color-white);
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
+      .burger-menu {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 1001;
+        background: none;
+        border: none;
+      }
+      .burger-line {
+        width: 25px;
+        height: 3px;
+        background: var(--color-white);
+        border-radius: 3px;
+        transition: var(--transition);
+      }
+      .burger-menu.active .burger-line:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+      .burger-menu.active .burger-line:nth-child(2) {
+        opacity: 0;
+      }
+      .burger-menu.active .burger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+      .mobile-menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--color-white);
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        overflow-y: auto;
+        transition: left 0.3s ease;
+      }
+      .mobile-menu-overlay.active {
+        left: 0;
+      }
+      .mobile-menu-backdrop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .mobile-menu-backdrop.active {
+        opacity: 1;
+        pointer-events: all;
+      }
 
-      /* ==================== Container Layout ==================== */
       .container {
         display: flex;
         gap: 1.5rem;
@@ -144,7 +201,7 @@
         margin: 0 auto;
       }
 
-      /* ==================== Sidebar Styling ==================== */
+      /* sidebar */
       .sidebar {
         flex-shrink: 0;
         top: 5rem;
@@ -162,7 +219,7 @@
         width: 12rem;
       }
 
-      /* ==================== Menu ==================== */
+      /* menu */
       .menu {
         background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
         border-radius: var(--border-radius);
@@ -226,7 +283,7 @@
         opacity: 1;
       }
 
-      /* ==================== Sidebar Footer ==================== */
+      /* sidebar footer*/
       .sidebar-footer {
         background: linear-gradient(135deg, #1d5032 0%, #2d7a4a 100%);
         color: var(--color-white);
@@ -252,7 +309,7 @@
         color: #a8d4ba;
       }
 
-      /* ==================== Hero Section ==================== */
+      /* hero */
       .hero {
         background: linear-gradient(
           135deg,
@@ -301,7 +358,6 @@
         position: relative;
       }
 
-      /* ==================== Buttons ==================== */
       .button {
         display: inline-block;
         padding: 0.5rem 1.5rem;
@@ -326,7 +382,6 @@
         background: linear-gradient(135deg, #a0845a 0%, #b89968 100%);
       }
 
-      /* ==================== Content Grid ==================== */
       .content-grid {
         display: flex;
         flex-direction: column;
@@ -334,7 +389,6 @@
         margin-bottom: var(--spacing-lg);
       }
 
-      /* ==================== Cards ==================== */
       .card {
         background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
         border-radius: var(--border-radius);
@@ -447,7 +501,7 @@
         color: var(--color-primary);
       }
 
-      /* ==================== Info Box ==================== */
+      /* info box */
       .info-box {
         background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
         border-radius: var(--border-radius);
@@ -490,7 +544,6 @@
         margin: 0;
       }
 
-      /* ==================== Feature Box ==================== */
       .feature-box {
         background: linear-gradient(135deg, #ffffff 0%, #f8fffe 100%);
         border-radius: var(--border-radius);
@@ -537,7 +590,6 @@
         line-height: 1.6;
       }
 
-      /* ==================== Stats Box ==================== */
       .stats-box {
         background: linear-gradient(
           135deg,
@@ -584,7 +636,7 @@
         margin: 0;
       }
 
-      /* ==================== Page Footer ==================== */
+      /* page footer */
       .page-footer {
         background: linear-gradient(135deg, #0d2818 0%, #1d5032 100%);
         color: var(--color-white);
@@ -651,13 +703,29 @@
         color: #a8d4ba;
       }
 
-      /* ==================== Responsive Design ==================== */
+      /* adaptiv */
       @media (max-width: 1200px) {
         .sidebar-left,
         .sidebar-right {
           display: none;
         }
+        .burger-menu {
+          display: flex;
+        }
+        .mobile-menu-overlay,
+        .mobile-menu-backdrop {
+          display: block;
+        }
+        .mobile-info-box,
+        .mobile-features,
+        .mobile-stats,
+        .mobile-sidebar-footer {
+          display: block;
+        }
 
+        .features-grid {
+          display: grid;
+        }
         .container {
           gap: 0;
         }
@@ -713,8 +781,8 @@
         }
 
         .logo {
-          width: 2rem;
-          height: 2rem;
+          width: 4rem;
+          height: 4rem;
           font-size: 1.25rem;
         }
 
@@ -748,7 +816,6 @@
     </style>
   </head>
   <body>
-    <!-- Header -->
     <header class="header">
       <div class="header-container">
         <div class="logo-section">
@@ -759,14 +826,30 @@
             />
           </div>
         </div>
+        <button class="burger-menu" id="burgerMenu">
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
       </div>
     </header>
+    <div class="mobile-menu-backdrop" id="menuBackdrop"></div>
+    <div class="mobile-menu-overlay" id="mobileMenu">
+      <nav class="menu">
+        <h2 class="menu-title">Меню</h2>
+        <ul class="menu-list">
+          <li><a href="#" class="menu-item">Головна</a></li>
+          <li><a href="#" class="menu-item">Про ліс</a></li>
+          <li><a href="#" class="menu-item">Флора</a></li>
+          <li><a href="#" class="menu-item">Фауна</a></li>
+          <li><a href="#" class="menu-item">Охорона</a></li>
+          <li><a href="#" class="menu-item">Контакти</a></li>
+        </ul>
+      </nav>
+    </div>
 
-    <!-- Main Container -->
     <div class="container">
-      <!-- Left Sidebar -->
       <aside class="sidebar sidebar-left">
-        <!-- Side Menu -->
         <nav class="menu">
           <h2 class="menu-title">Меню</h2>
           <ul class="menu-list">
@@ -779,19 +862,16 @@
           </ul>
         </nav>
 
-        <!-- Footer for Sidebar -->
         <footer class="sidebar-footer">
           <p class="footer-title">Ліс у Карпатах</p>
           <p class="footer-description">
             Проект охорони природної спадщини Карпатів
           </p>
-          <p class="footer-copyright">© 2024 Всі права захищені</p>
+          <p class="footer-copyright">© 2025 Всі права захищені</p>
         </footer>
       </aside>
 
-      <!-- Main Content -->
       <main class="main-content">
-        <!-- Hero Section -->
         <section class="hero">
           <h2 class="hero-title">Лісництво у Карпатах</h2>
           <p class="hero-text">
@@ -802,9 +882,7 @@
           <button class="button button-primary">Дізнатися більше</button>
         </section>
 
-        <!-- Content Grid -->
         <div class="content-grid">
-          <!-- Card 1 -->
           <article class="card">
             <div class="card-image"></div>
             <div class="card-content">
@@ -848,7 +926,6 @@
             </div>
           </article>
 
-          <!-- Card 2 -->
           <article class="card">
             <div class="card-image"></div>
             <div class="card-content">
@@ -893,7 +970,6 @@
             </div>
           </article>
 
-          <!-- Card 3 -->
           <article class="card">
             <div class="card-image"></div>
             <div class="card-content">
@@ -940,9 +1016,7 @@
         </div>
       </main>
 
-      <!-- Right Sidebar -->
       <aside class="sidebar sidebar-right">
-        <!-- Info Section -->
         <section class="info-box">
           <h2 class="info-title">Важлива інформація</h2>
           <ul class="info-list">
@@ -961,7 +1035,6 @@
           </ul>
         </section>
 
-        <!-- Feature Block 1 -->
         <article class="feature-box">
           <div class="feature-icon">☁️</div>
           <h3 class="feature-title">Клімат</h3>
@@ -970,7 +1043,6 @@
           </p>
         </article>
 
-        <!-- Feature Block 2 -->
         <article class="feature-box">
           <div class="feature-icon">🌍</div>
           <h3 class="feature-title">Екосистема</h3>
@@ -979,7 +1051,6 @@
           </p>
         </article>
 
-        <!-- Statistics Card -->
         <section class="stats-box">
           <h3 class="stats-title">Цікаві факти</h3>
           <div class="stats-content">
@@ -991,7 +1062,6 @@
       </aside>
     </div>
 
-    <!-- Footer -->
     <footer class="page-footer">
       <div class="footer-container">
         <div class="footer-grid">
